@@ -7,7 +7,7 @@ to this software to the public domain worldwide. This software is
 distributed without any warranty.
 ]]
 
-local MAX_INACTIVE_TIME = 20
+local MAX_INACTIVE_TIME = 300
 local CHECK_INTERVAL = 1
 local WARN_TIME = 20
 
@@ -45,9 +45,6 @@ minetest.register_globalstep(function(dtime)
 				
 				--Kick player if he/she has been inactive for longer than MAX_INACTIVE_TIME seconds
 				if players[playerName]["lastAction"] + MAX_INACTIVE_TIME < currGameTime then 
-					print(dump(players[playerName]["lastAction"]))
-					print(dump(currGameTime))
-					print(dump(MAX_INACTIVE_TIME))
 					minetest.kick_player(playerName, "Kicked for inactivity")
 				end
 				
