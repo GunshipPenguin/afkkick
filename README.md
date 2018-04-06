@@ -1,7 +1,11 @@
-Afk Kick mod for Minetest by GunshipPenguin
+# Afk Kick mod
+### for Minetest
+### by GunshipPenguin
 
 Kicks players after they are Afk for an amount of time. By default, 
 players are kicked after five minutes, although this can be configured.
+
+This mod also adds a `canafk` privilege. players with this privilege can AFK for any amount of time without getting kicked.
 
 Licence: CC0 (see COPYING file)
 
