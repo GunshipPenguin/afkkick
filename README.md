@@ -1,4 +1,7 @@
-Afk Kick mod for Minetest by GunshipPenguin
+
+# Afk Kick
+
+a mod for Minetest by GunshipPenguin
 
 Kicks players after they are Afk for an amount of time. By default, 
 players are kicked after five minutes, although this can be configured.
@@ -21,3 +24,8 @@ WARN_TIME (default 20)
 
 Number of seconds remaining before being kicked that a player will 
 start to be warned via chat message.
+
+## Changelog:
+
+- 07/22/2021 Beanzilla added the priv bypass_afk_kick which prevents being kicked for an unlimited amount of time. (Default's
+to being granted to server admin and if single player)

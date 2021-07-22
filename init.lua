@@ -30,6 +30,12 @@ minetest.register_on_chat_message(function(playerName, message)
 	players[playerName]["lastAction"] = minetest.get_gametime()
 end)
 
+-- Provide a priv to prevent being kicked
+minetest.register_privilege("bypass_afk_kick", {
+	description = "Don't get kicked for being AFK.",
+	give_to_singleplayer = true,
+})
+
 minetest.register_globalstep(function(dtime)
 	local currGameTime = minetest.get_gametime()
 
@@ -55,11 +61,15 @@ minetest.register_globalstep(function(dtime)
 			if checkNow then
 				--Kick player if he/she has been inactive for longer than MAX_INACTIVE_TIME seconds
 				if info["lastAction"] + MAX_INACTIVE_TIME < currGameTime then
-					minetest.kick_player(playerName, "Kicked for inactivity")
+					-- Only kick the player if they don't have bypass_afk_kick
+					if not minetest.check_player_privs(playerName, {bypass_afk_kick = true}) then
+						minetest.kick_player(playerName, "Kicked for inactivity")
+					end
 				end
 
 				--Warn player if he/she has less than WARN_TIME seconds to move or be kicked
-				if info["lastAction"] + MAX_INACTIVE_TIME - WARN_TIME < currGameTime then
+				-- Only show this if they can be kicked
+				if info["lastAction"] + MAX_INACTIVE_TIME - WARN_TIME < currGameTime and not minetest.check_player_privs(playerName, {bypass_afk_kick = true}) then
 					minetest.chat_send_player(playerName,
 						minetest.colorize("#FF8C00", "Warning, you have " ..
 						tostring(info["lastAction"] + MAX_INACTIVE_TIME - currGameTime + 1) ..
