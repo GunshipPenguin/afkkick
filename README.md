@@ -29,3 +29,4 @@ start to be warned via chat message.
 
 - 07/22/2021 Beanzilla added the priv bypass_afk_kick which prevents being kicked for an unlimited amount of time. (Default's
 to being granted to server admin and if single player)
+- 07/22/2021 Beanzilla fixed issue #4

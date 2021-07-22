@@ -7,6 +7,7 @@ to this software to the public domain worldwide. This software is
 distributed without any warranty.
 ]]
 
+-- Settings
 local MAX_INACTIVE_TIME = 300
 local CHECK_INTERVAL = 1
 local WARN_TIME = 20
@@ -27,6 +28,10 @@ minetest.register_on_leaveplayer(function(player)
 end)
 
 minetest.register_on_chat_message(function(playerName, message)
+	-- Verify that it's a player and that it is not the terminal
+	if not playerName or not minetest.get_player_by_name(playerName) then
+		return -- Abort tracking the last action
+	end
 	players[playerName]["lastAction"] = minetest.get_gametime()
 end)
 
